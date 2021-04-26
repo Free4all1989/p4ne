@@ -22,8 +22,6 @@ for file in glob.glob('..\\lab1.5\\config_files\\*.txt'):
 
 
 L2 = set(L1)
-print(len(L1), len(L2))
-print(L2)
 
 wb = Workbook()
 ws = wb.active
@@ -34,9 +32,9 @@ for i in L2:
     net = str(ipaddress.ip_interface(i).network).split('/')
     mask = ipaddress.ip_interface(i).netmask
     print(net[0], " ", mask)
-    lst = []
-    lst.append(net[0])
-    lst.append(str(mask))
-    ws.append(lst)
+    row = []
+    row.append(net[0])
+    row.append(str(mask))
+    ws.append(row)
 
 wb.save(filename="netplan.xlsx")
