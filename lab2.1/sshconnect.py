@@ -26,25 +26,24 @@ L6 = []
 for line in resp.splitlines():
     if re.match('^(.*) is (.*), line protocol .*', line):
         m = re.match('^(.*) is (.*), line protocol .*', line)
-        int = str(m.group(1))
+        interface = str(m.group(1))
         state = str(m.group(2))
-        L1.append(int)
+        L1.append(interface)
         L2.append(state)
-    elif re.match('^.*?(\d{1,}).*packets input,\s(\d{1,}).*', line):
-        m = re.match('^.*?(\d{1,}).*packets input,\s(\d{1,}).*', line)
+    elif re.match('^.*?(\d+).*packets input,\s(\d+).*', line):
+        m = re.match('^.*?(\d+).*packets input,\s(\d+).*', line)
         inputp = str(m.group(1))
         inputb = str(m.group(2))
         L3.append(inputp)
         L4.append(inputb)
-    elif re.match('^.*?(\d{1,}).*packets output,\s(\d{1,}).*', line):
-        m = re.match('^.*?(\d{1,}).*packets output,\s(\d{1,}).*', line)
+    elif re.match('^.*?(\d+).*packets output,\s(\d+).*', line):
+        m = re.match('^.*?(\d+).*packets output,\s(\d+).*', line)
         outputp = str(m.group(1))
         outputb = str(m.group(2))
         L5.append(outputp)
         L6.append(outputb)
 ssh_connection.close()
 
-# print(L1, L2, L3, L4, L5, L6)
 D = {}
 for i in range(len(L1)):
     D[L1[i]] = {'state': L2[i], 'in pack': L3[i], 'in byte': L4[i], 'out pack': L5[i], 'out byte': L6[i]}
