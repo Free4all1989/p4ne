@@ -28,9 +28,12 @@ for file in glob.glob('..\\lab1.5\\config_files\\*.txt'):
     with open(file) as f:
         for line in f:
             L = classify(line)
-            if "ip" in L: L1.append(L)
-            elif "int" in L: L2.append(L)
-            elif "HOST" in L: L3.append(L)
+            if "ip" in L:
+                L1.append(L)
+            elif "int" in L:
+                L2.append(L)
+            elif "HOST" in L:
+                L3.append(L)
 
 print(L1)
 print(L2)
